@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "expo": "^31.0.2",
+    "moment": "^2.24.0",
     "native-base": "^2.8.1",
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
