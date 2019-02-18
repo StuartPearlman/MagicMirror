@@ -1,8 +1,31 @@
 import React from 'react';
+import { Font, Icon } from 'expo';
 import { Dashboard } from './components';
 
-export default function App() {
-  return (
-    <Dashboard />
-  );
+const { Feather, MaterialCommunityIcons, Ionicons } = Icon;
+
+export default class App extends React.Component {
+  state = { fontLoaded: false };
+
+  async componentWillMount() {
+    await Promise.all([
+      Font.loadAsync(Feather.font),
+      Font.loadAsync(MaterialCommunityIcons.font),
+      Font.loadAsync(Ionicons.font),
+    ]);
+
+    this.setState({ fontLoaded: true });
+  }
+
+  render() {
+    const { fontLoaded } = this.state;
+
+    if (fontLoaded) {
+      return (
+        <Dashboard />
+      );
+    }
+
+    return null;
+  }
 }
