@@ -56,18 +56,18 @@ styles = StyleSheet.create({
   },
   timeText: {
     color: 'white',
-    fontSize: 150,
+    fontSize: 130,
     fontWeight: 'bold',
   },
   dateText: {
     color: 'black',
-    fontSize: 70,
+    fontSize: 50,
     fontWeight: 'bold',
   },
   dateWrapper: {
     backgroundColor: 'white',
-    height: 180,
-    width: 180,
+    height: 160,
+    width: 160,
     alignItems: 'center',
     justifyContent: 'space-around',
     padding: 5,

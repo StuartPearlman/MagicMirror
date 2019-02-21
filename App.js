@@ -1,6 +1,7 @@
 import React from 'react';
 import { Font, Icon } from 'expo';
 import { Dashboard } from './components';
+import { weatherService } from './services';
 
 const { Feather, MaterialCommunityIcons, Ionicons } = Icon;
 
@@ -15,6 +16,9 @@ export default class App extends React.Component {
     ]);
 
     this.setState({ fontLoaded: true });
+
+    // Warm up cache
+    await weatherService.getData();
   }
 
   render() {

@@ -1,1 +1,1 @@
-export getWeather from './weatherService';
+export weatherService from './weatherService';

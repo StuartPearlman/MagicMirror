@@ -1,16 +1,24 @@
+import axios from 'axios';
 import keys from '../keys';
+import DataCache from './dataCache';
 
-export default async function getWeather() {
+async function getWeatherData() {
   const { darkSkyApiKey } = keys;
   let weatherInfo;
 
   try {
-    const response = await fetch(`https://api.darksky.net/forecast/${darkSkyApiKey}/41.9311509,-87.7038042?exclude=minutely,hourly,daily,alerts,flags`);
     const {
-      currently: {
-        icon: weatherType, apparentTemperature: feelsLike, temperature, summary,
+      data: {
+        currently: {
+          icon: weatherType, apparentTemperature: feelsLike, temperature, summary,
+        },
       },
-    } = await response.json();
+    } = await axios.get(`https://api.darksky.net/forecast/${darkSkyApiKey}/41.9311667,-87.703772`, {
+      params: {
+        exclude: 'minutely,hourly,daily,alerts,flags',
+      },
+      timeout: 3000,
+    });
 
     weatherInfo = {
       weatherType,
@@ -19,8 +27,15 @@ export default async function getWeather() {
       temperature: Math.round(temperature),
     };
   } catch (e) {
-    weatherInfo = {};
+    // eslint-disable-next-line no-console
+    console.error('Error retrieving weather info:', e && e.message);
+
+    weatherInfo = {
+      hasError: true,
+    };
   }
 
   return weatherInfo;
 }
+
+export default new DataCache(getWeatherData, 10);
