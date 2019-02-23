@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import CameraFaceDetector from '../CameraFaceDetector/CameraFaceDetector';
 import Weather from '../Weather/Weather';
 import Clock from '../Clock/Clock';
+import Transit from '../Transit/Transit';
 
 let styles;
 
@@ -12,6 +13,7 @@ export default function DashBoard() {
       <View style={styles.container}>
         <Clock />
         <Weather />
+        <Transit />
       </View>
     </CameraFaceDetector>
   );
