@@ -8,7 +8,7 @@ async function getBuses() {
   let busInfo;
 
   try {
-    const { data: { 'bustime-response': { prd: predictions } } } = await axios.get('http://www.ctabustracker.com/bustime/api/v2/getpredictions', {
+    const { data: { 'bustime-response': { prd: predictions = [] } } } = await axios.get('http://www.ctabustracker.com/bustime/api/v2/getpredictions', {
       params: {
         key: ctaBusApiKey,
         stpid: '11065',
@@ -22,7 +22,7 @@ async function getBuses() {
       .map(({ prdctdn }) => prdctdn);
 
     busInfo = {
-      arrivalTimes: arrivalTimes.slice(0, 2),
+      arrivalTimes: arrivalTimes.slice(0, 1),
       title: 'Route 76',
       subtitle: 'Diversey (W)',
     };
@@ -43,7 +43,7 @@ async function getTrains() {
   let trainInfo;
 
   try {
-    const { data: { ctatt: { eta: predictions } } } = await axios.get('http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx', {
+    const { data: { ctatt: { eta: predictions = [] } } } = await axios.get('http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx', {
       params: {
         key: ctaTrainApiKey,
         stpid: '30198',
@@ -55,7 +55,7 @@ async function getTrains() {
     const arrivalTimes = predictions.map(({ arrT: arrivalTime }) => moment(arrivalTime).diff(moment(), 'minutes'));
 
     trainInfo = {
-      arrivalTimes: arrivalTimes.slice(0, 2),
+      arrivalTimes: arrivalTimes.slice(0, 1),
       title: 'Blue Line',
       subtitle: 'Forest Park',
     };

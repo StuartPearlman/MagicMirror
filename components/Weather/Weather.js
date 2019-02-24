@@ -89,5 +89,6 @@ styles = StyleSheet.create({
   infoBox: {
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '50%',
   },
 });

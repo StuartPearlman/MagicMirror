@@ -22,31 +22,30 @@ export default class Transit extends React.Component {
   }) => {
     if (!hasError) {
       return (
-        <React.Fragment>
-          <View style={styles.column}>
-            <MaterialCommunityIcons name={isBus ? 'bus' : 'train'} size={128} color="white" />
-            <Text style={styles.whiteText}>
-              {title}
+        <View style={styles.column}>
+          <MaterialCommunityIcons name={isBus ? 'bus' : 'train'} size={128} color="white" />
+          <Text style={styles.title}>
+            {title}
+          </Text>
+          <Text style={styles.subtitle}>
+            {subtitle}
+          </Text>
+          <View style={styles.horizontalRule} />
+          {arrivalTimes.map((time, index) => (
+            // This is okay because arrivalTimes is never mutated
+            // eslint-disable-next-line react/no-array-index-key
+            <Text style={styles.arrivalTimes} key={index}>
+              {time}
+              {' '}
+              min
             </Text>
-          </View>
-          <View style={styles.column}>
-            <Text style={styles.whiteText}>
-              {subtitle}
+          ))}
+          {!arrivalTimes.length && (
+            <Text style={styles.noArrivals}>
+              No scheduled arrivals
             </Text>
-            {arrivalTimes.map((time, index) => (
-              // This is okay because arrivalTimes is never mutated
-              // eslint-disable-next-line react/no-array-index-key
-              <Text style={styles.whiteText} key={index}>
-                {time}
-              </Text>
-            ))}
-            {!arrivalTimes.length && (
-              <Text style={styles.whiteText}>
-                No scheduled arrivals.
-              </Text>
-            )}
-          </View>
-        </React.Fragment>
+          )}
+        </View>
       );
     }
 
@@ -79,20 +78,34 @@ const textStyles = {
 
 styles = StyleSheet.create({
   container: {
-    alignContent: 'stretch',
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    flex: 1.5,
     width: '100%',
   },
-  whiteText: {
+  column: {
+    width: '50%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  title: {
     ...textStyles,
   },
-  column: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'column',
+  subtitle: {
+    ...textStyles,
+    fontSize: 20,
+  },
+  horizontalRule: {
     width: '50%',
+    borderWidth: 1,
+    borderColor: 'white',
+    margin: 5,
+  },
+  arrivalTimes: {
+    ...textStyles,
+  },
+  noArrivals: {
+    ...textStyles,
   },
 });
