@@ -5,7 +5,10 @@ import DataCache from './dataCache';
 
 async function getBuses() {
   const { ctaBusApiKey } = keys;
-  let busInfo;
+  const busInfo = {
+    title: 'Route 76',
+    subtitle: 'Diversey (W)',
+  };
 
   try {
     const { data: { 'bustime-response': { prd: predictions = [] } } } = await axios.get('http://www.ctabustracker.com/bustime/api/v2/getpredictions', {
@@ -19,20 +22,14 @@ async function getBuses() {
 
     const arrivalTimes = predictions
       .filter(({ prdctdn }) => prdctdn !== 'DUE')
-      .map(({ prdctdn }) => prdctdn);
+      .map(({ prdctdn }) => parseInt(prdctdn, 10));
 
-    busInfo = {
-      arrivalTimes: arrivalTimes.slice(0, 1),
-      title: 'Route 76',
-      subtitle: 'Diversey (W)',
-    };
+    busInfo.arrivalTimes = arrivalTimes.slice(0, 2);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error('Error retrieving bus info:', e && e.message);
 
-    busInfo = {
-      hasError: true,
-    };
+    busInfo.hasError = true;
   }
 
   return busInfo;
@@ -40,7 +37,10 @@ async function getBuses() {
 
 async function getTrains() {
   const { ctaTrainApiKey } = keys;
-  let trainInfo;
+  const trainInfo = {
+    title: 'Blue Line',
+    subtitle: 'Forest Park',
+  };
 
   try {
     const { data: { ctatt: { eta: predictions = [] } } } = await axios.get('http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx', {
@@ -54,18 +54,12 @@ async function getTrains() {
 
     const arrivalTimes = predictions.map(({ arrT: arrivalTime }) => moment(arrivalTime).diff(moment(), 'minutes'));
 
-    trainInfo = {
-      arrivalTimes: arrivalTimes.slice(0, 1),
-      title: 'Blue Line',
-      subtitle: 'Forest Park',
-    };
+    trainInfo.arrivalTimes = arrivalTimes.filter(time => time !== 0).slice(0, 2);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error('Error retrieving train info:', e && e.message);
 
-    trainInfo = {
-      hasError: true,
-    };
+    trainInfo.hasError = true;
   }
 
   return trainInfo;
@@ -75,6 +69,7 @@ async function getTransitData() {
   const [busesData, trainsData] = await axios.all([getBuses(), getTrains()]);
 
   return {
+    hasError: busesData.hasError || trainsData.hasError,
     busesData,
     trainsData,
   };

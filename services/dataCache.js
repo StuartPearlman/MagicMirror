@@ -3,14 +3,14 @@ export default class DataCache {
   constructor(fetchFunction, minutesToLive = 0) {
     this.millisecondsToLive = minutesToLive * 60 * 1000;
     this.fetchFunction = fetchFunction;
-    this.cache = null;
+    this.cache = {};
     this.fetchDate = new Date(0);
   }
 
   isCacheExpired = () => this.fetchDate.getTime() + this.millisecondsToLive < new Date().getTime();
 
   getData = async () => {
-    if (!this.cache || this.isCacheExpired()) {
+    if (!Object.keys(this.cache).length || this.isCacheExpired() || this.cache.hasError) {
       try {
         const data = await this.fetchFunction();
         this.cache = data;
@@ -18,7 +18,8 @@ export default class DataCache {
 
         return data;
       } catch (e) {
-        throw new Error('Error retrieving data from API:', e && e.message);
+        // eslint-disable-next-line no-console
+        console.error('Error populating cache:', e && e.message);
       }
     }
 

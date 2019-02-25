@@ -14,7 +14,7 @@ export default class Transit extends React.Component {
 
   async componentWillMount() {
     const transitInfo = await transitService.getData();
-    this.setState({ ...transitInfo });
+    this.setState({ ...transitInfo, isTransitInfoLoaded: true });
   }
 
   getTransitTimesMarkup = ({
@@ -52,10 +52,10 @@ export default class Transit extends React.Component {
   );
 
   render() {
-    const { busesData = {}, trainsData = {} } = this.state;
+    const { busesData = {}, trainsData = {}, isTransitInfoLoaded } = this.state;
     const isNoDataAvailable = busesData.hasError && trainsData.hasError;
 
-    if (!isNoDataAvailable && Object.keys(this.state).length) {
+    if (!isNoDataAvailable && isTransitInfoLoaded) {
       return (
         <View style={styles.container}>
           {this.getTransitTimesMarkup({ ...busesData, isBus: true })}

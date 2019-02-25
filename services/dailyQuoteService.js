@@ -22,7 +22,7 @@ async function getQuoteData() {
     });
 
     quoteInfo = {
-      quote,
+      quote: quote.trim(),
       author,
     };
   } catch (e) {
