@@ -48,7 +48,6 @@ export default class Clock extends React.Component {
 
 styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',

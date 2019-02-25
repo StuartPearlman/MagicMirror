@@ -68,7 +68,6 @@ const centeredRow = {
 styles = StyleSheet.create({
   container: {
     ...centeredRow,
-    flex: 1,
     width: '100%',
   },
   temperature: {

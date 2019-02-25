@@ -4,6 +4,7 @@ import CameraFaceDetector from '../CameraFaceDetector/CameraFaceDetector';
 import Weather from '../Weather/Weather';
 import Clock from '../Clock/Clock';
 import Transit from '../Transit/Transit';
+import DailyQuote from '../DailyQuote/DailyQuote';
 
 let styles;
 
@@ -14,6 +15,7 @@ export default function DashBoard() {
         <Clock />
         <Weather />
         <Transit />
+        <DailyQuote />
       </View>
     </CameraFaceDetector>
   );
@@ -22,7 +24,7 @@ export default function DashBoard() {
 styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
 });

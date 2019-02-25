@@ -19,38 +19,37 @@ export default class Transit extends React.Component {
 
   getTransitTimesMarkup = ({
     title, subtitle, arrivalTimes = [], hasError, isBus,
-  }) => {
-    if (!hasError) {
-      return (
-        <View style={styles.column}>
-          <MaterialCommunityIcons name={isBus ? 'bus' : 'train'} size={128} color="white" />
-          <Text style={styles.title}>
-            {title}
-          </Text>
-          <Text style={styles.subtitle}>
-            {subtitle}
-          </Text>
-          <View style={styles.horizontalRule} />
-          {arrivalTimes.map((time, index) => (
-            // This is okay because arrivalTimes is never mutated
-            // eslint-disable-next-line react/no-array-index-key
-            <Text style={styles.arrivalTimes} key={index}>
-              {time}
-              {' '}
-              min
-            </Text>
-          ))}
-          {!arrivalTimes.length && (
-            <Text style={styles.noArrivals}>
-              No scheduled arrivals
-            </Text>
-          )}
-        </View>
-      );
-    }
-
-    return null;
-  };
+  }) => (
+    <View style={styles.column}>
+      <MaterialCommunityIcons name={isBus ? 'bus' : 'train'} size={128} color="white" />
+      <Text style={styles.title}>
+        {title}
+      </Text>
+      <Text style={styles.subtitle}>
+        {subtitle}
+      </Text>
+      <View style={styles.horizontalRule} />
+      {arrivalTimes.map((time, index) => (
+        // This is okay because arrivalTimes is never mutated
+        // eslint-disable-next-line react/no-array-index-key
+        <Text style={styles.arrivalTimes} key={index}>
+          {time}
+          {' '}
+          min
+        </Text>
+      ))}
+      {!arrivalTimes.length && !hasError && (
+        <Text style={styles.noArrivals}>
+          No scheduled arrivals
+        </Text>
+      )}
+      {hasError && (
+        <Text style={styles.noArrivals}>
+          No data available
+        </Text>
+      )}
+    </View>
+  );
 
   render() {
     const { busesData = {}, trainsData = {} } = this.state;

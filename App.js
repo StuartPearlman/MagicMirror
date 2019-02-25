@@ -1,7 +1,7 @@
 import React from 'react';
 import { Font, Icon } from 'expo';
 import { Dashboard } from './components';
-import { weatherService, transitService } from './services';
+import { weatherService, transitService, dailyQuoteService } from './services';
 
 const { Feather, MaterialCommunityIcons, Ionicons } = Icon;
 
@@ -21,6 +21,7 @@ export default class App extends React.Component {
     await Promise.all([
       weatherService.getData(),
       transitService.getData(),
+      dailyQuoteService.getData(),
     ]);
   }
 
