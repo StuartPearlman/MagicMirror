@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "buffer": "^5.2.1",
     "expo": "^31.0.2",
     "moment": "^2.24.0",
     "native-base": "^2.8.1",

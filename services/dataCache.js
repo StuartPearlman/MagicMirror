@@ -1,4 +1,4 @@
-// https://www.mojotech.com/blog/node-js-memory-cache/
+// h/t https://www.mojotech.com/blog/node-js-memory-cache/
 export default class DataCache {
   constructor(fetchFunction, minutesToLive = 0) {
     this.millisecondsToLive = minutesToLive * 60 * 1000;
