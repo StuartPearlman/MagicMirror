@@ -28,11 +28,19 @@ class SpotifyService {
         timeout: 1500,
       };
 
-      const { data: { item: { name: title, album: { images: [, { url: imgUrl }] }, artists } } } = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', options);
+      const {
+        data: {
+          progress_ms: songProgress,
+          item: {
+            name: title, duration_ms: songDuration, artists,
+          },
+        },
+      } = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', options);
 
       currentlyPlaying = {
         title,
-        imgUrl,
+        songDuration,
+        songProgress,
         artist: artists.map(artist => artist.name).join(', '),
       };
     } catch (e) {
