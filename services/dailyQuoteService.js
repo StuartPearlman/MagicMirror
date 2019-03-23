@@ -27,7 +27,7 @@ async function getQuoteData() {
     };
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error('Error retrieving quote info:', e && e.message);
+    console.warn('Error retrieving quote info:', e && e.message);
 
     quoteInfo = {
       hasError: true,

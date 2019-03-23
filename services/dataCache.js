@@ -19,7 +19,7 @@ export default class DataCache {
         return data;
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.error('Error populating cache:', e && e.message);
+        console.warn('Error populating cache:', e && e.message);
       }
     }
 

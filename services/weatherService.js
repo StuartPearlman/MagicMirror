@@ -28,7 +28,7 @@ async function getWeatherData() {
     };
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error('Error retrieving weather info:', e && e.message);
+    console.warn('Error retrieving weather info:', e && e.message);
 
     weatherInfo = {
       hasError: true,

@@ -5,6 +5,7 @@ import {
 import { Icon } from 'expo';
 import moment from 'moment';
 import { spotifyService } from '../../services';
+import DailyQuote from '../DailyQuote/DailyQuote';
 
 const { MaterialCommunityIcons } = Icon;
 
@@ -40,10 +41,11 @@ export default class Spotify extends React.Component {
 
   render() {
     const {
-      title, songDuration, songProgress, artist, currentTrackTime, trackEndTime, hasError,
+      title, songDuration, songProgress, artist,
+      currentTrackTime, trackEndTime, hasError, isPlaying,
     } = this.state;
 
-    if (!hasError && Object.keys(this.state).length) {
+    if (!hasError && Object.keys(this.state).length && isPlaying) {
       return (
         <View style={styles.container}>
           <MaterialCommunityIcons name="spotify" size={128} color="white" />
@@ -74,7 +76,7 @@ export default class Spotify extends React.Component {
       );
     }
 
-    return null;
+    return <DailyQuote />;
   }
 }
 

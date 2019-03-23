@@ -27,7 +27,7 @@ async function getBuses() {
     busInfo.arrivalTimes = arrivalTimes.slice(0, 2);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error('Error retrieving bus info:', e && e.message);
+    console.warn('Error retrieving bus info:', e && e.message);
 
     busInfo.hasError = true;
   }
@@ -57,7 +57,7 @@ async function getTrains() {
     trainInfo.arrivalTimes = arrivalTimes.filter(time => time !== 0).slice(0, 2);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error('Error retrieving train info:', e && e.message);
+    console.warn('Error retrieving train info:', e && e.message);
 
     trainInfo.hasError = true;
   }

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Font, Icon } from 'expo';
 import { Dashboard } from './components';
-import { weatherService, transitService, dailyQuoteService } from './services';
+import {
+  weatherService, transitService, dailyQuoteService, spotifyService,
+} from './services';
 
 const { Feather, MaterialCommunityIcons, Ionicons } = Icon;
 
@@ -22,6 +24,7 @@ export default class App extends React.Component {
       weatherService.getData(),
       transitService.getData(),
       dailyQuoteService.getData(),
+      spotifyService.retrieveCurrentlyPlaying(),
     ]);
   }
 

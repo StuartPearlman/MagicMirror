@@ -4,7 +4,7 @@ import CameraFaceDetector from '../CameraFaceDetector/CameraFaceDetector';
 import Weather from '../Weather/Weather';
 import Clock from '../Clock/Clock';
 import Transit from '../Transit/Transit';
-import DailyQuote from '../DailyQuote/DailyQuote';
+import Spotify from '../Spotify/Spotify';
 
 let styles;
 
@@ -15,7 +15,7 @@ export default function DashBoard() {
         <Clock />
         <Weather />
         <Transit />
-        <DailyQuote />
+        <Spotify />
       </View>
     </CameraFaceDetector>
   );

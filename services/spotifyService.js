@@ -28,24 +28,32 @@ class SpotifyService {
         timeout: 1500,
       };
 
-      const {
-        data: {
+      const { data } = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', options);
+
+      // Spotify API 204
+      if (data === '') {
+        currentlyPlaying = {
+          isPlaying: false,
+        };
+      } else {
+        const {
           progress_ms: songProgress,
           item: {
             name: title, duration_ms: songDuration, artists,
           },
-        },
-      } = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', options);
+        } = data;
 
-      currentlyPlaying = {
-        title,
-        songDuration,
-        songProgress,
-        artist: artists.map(artist => artist.name).join(', '),
-      };
+        currentlyPlaying = {
+          title,
+          songDuration,
+          songProgress,
+          isPlaying: true,
+          artist: artists.map(artist => artist.name).join(', '),
+        };
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.error('Error retrieving Spotify info:', e && e.message);
+      console.warn('Error retrieving Spotify info:', e && e.message);
 
       currentlyPlaying = {
         hasError: true,
@@ -81,7 +89,7 @@ class SpotifyService {
       this.tokenExpiresAt = moment().add(expiresIn, 'seconds');
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.error('Error refreshing Spotify token:', e && e.message);
+      console.warn('Error refreshing Spotify token:', e && e.message);
     }
   }
 }
