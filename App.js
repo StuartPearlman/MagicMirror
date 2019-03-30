@@ -1,5 +1,6 @@
 import React from 'react';
 import { Font, Icon } from 'expo';
+import momentTimezone from 'moment-timezone';
 import { Dashboard } from './components';
 import {
   weatherService, transitService, dailyQuoteService, spotifyService,
@@ -11,6 +12,8 @@ export default class App extends React.Component {
   state = { fontLoaded: false };
 
   async componentWillMount() {
+    momentTimezone.tz.setDefault('America/Chicago');
+
     await Promise.all([
       Font.loadAsync(Feather.font),
       Font.loadAsync(MaterialCommunityIcons.font),

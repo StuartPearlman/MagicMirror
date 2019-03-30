@@ -13,6 +13,7 @@
     "buffer": "^5.2.1",
     "expo": "^31.0.2",
     "moment": "^2.24.0",
+    "moment-timezone": "^0.5.23",
     "native-base": "^2.8.1",
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
