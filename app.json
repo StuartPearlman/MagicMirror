@@ -25,7 +25,14 @@
       "**/*"
     ],
     "android": {
-      "package": "com.melonstew.magicmirror"
+      "package": "com.melonstew.magicmirror",
+      "splash": {
+        "nodpi": "./assets/splash.png",
+        "ldpi": "./assets/splash.png",
+        "mdpi": "./assets/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#000000"
+      }
     }
   }
 }
