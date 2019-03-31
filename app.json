@@ -1,11 +1,13 @@
 {
   "expo": {
     "name": "Magic Mirror",
-    "description": "Weather, transit updates, Spotify, and more.",
+    "description": "",
     "slug": "MagicMirror",
     "privacy": "unlisted",
     "sdkVersion": "31.0.0",
-    "platforms": ["android"],
+    "platforms": [
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#000000",
@@ -21,6 +23,9 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.melonstew.magicmirror"
+    }
   }
 }
