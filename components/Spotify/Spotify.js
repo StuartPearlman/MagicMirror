@@ -76,7 +76,11 @@ export default class Spotify extends React.Component {
       );
     }
 
-    return <DailyQuote />;
+    if (Object.keys(this.state).length) {
+      return <DailyQuote />;
+    }
+
+    return null;
   }
 }
 
